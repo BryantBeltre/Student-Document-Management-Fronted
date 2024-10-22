@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+
+<div class="main-container">
+    <section class="py-3 text-center container">
+        <div class="row py-lg-3">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light"><b>SOLICITUD DE DOCUMENTOS POSTGRADOS</b></h1>
+            </div>
+        </div>
+    </section>
+
+    <div class="album py-3">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <!-- Primeras tres tarjetas -->
+                <div class="col" *ngFor="let group of groupedServices">
+                    <div class="card shadow-sm custom-card">
+                        <div class="card-body">
+                            <div class="list-group list-group-checkable d-grid gap-2 border-0">
+                                <!-- Mostrar el nombre del servicio -->
+                                <label class="text-center">
+                                    <b>{{ group.name }}</b>
+                                </label>
+
+                                <!-- Iterar por los tipos de servicio dentro del grupo -->
+                                <button *ngFor="let service of group.services" type="button"
+                                    class="list-group-item list-group-item-action btn btn-outline-primary"
+                                    (click)="openRegisterModal(service)">
+                                    {{ service.serviceType }}
+                                    <span class="d-block small opacity-50"><b>{{ service.price }} RD</b></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

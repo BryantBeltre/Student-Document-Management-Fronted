@@ -1,0 +1,72 @@
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    padding: 1rem;
+}
+
+.modal-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-body p {
+    margin-bottom: 0.75rem;
+}
+
+ul.list-group {
+    margin-top: 1rem;
+    padding-left: 0;
+}
+
+.list-group-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    margin-bottom: 0.75rem;
+}
+
+i.fas.fa-file-pdf {
+    font-size: 1.5rem;
+}
+
+a.text-decoration-none {
+    color: #007bff;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+a.text-decoration-none:hover {
+    text-decoration: underline;
+}
+
+.form-select-sm {
+    border-radius: 0.375rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+.modal-footer {
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid #dee2e6;
+}
+
+button.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+}
+
+button.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}

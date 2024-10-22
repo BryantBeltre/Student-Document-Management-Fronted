@@ -1,0 +1,105 @@
+<app-navbar></app-navbar>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <br>
+            <h4 class="text-default fw-bold text-center">Completar procesos estudiantiles</h4>
+            <hr class="border-primary">
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <!-- Botones para filtrar por estatus -->
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <button class="btn btn-primary mx-2" (click)="filterByStatus(4)" [disabled]="isStatus4View">Mostrar Estatus
+                Completada</button>
+            <button class="btn btn-secondary mx-2" (click)="filterByStatus(5)" [disabled]="!isStatus4View">Mostrar
+                Estatus Pagada</button>
+        </div>
+    </div>
+
+    <br>
+
+    <!-- Tabla de usuarios con límite de 10 registros y scroll -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive bg-light rounded shadow p-4" style="max-height: 600px; overflow-y: auto;">
+                <table class="table align-middle mb-0 bg-white table-hover table-bordered rounded shadow-sm"
+                    id="userTable">
+                    <thead class="bg-primary text-white text-uppercase">
+                        <tr>
+                            <th hidden>Id</th>
+                            <th *ngIf="isStatus4View === false"><input type="checkbox"
+                                    (change)="toggleAllSelections($event)"> Seleccionar Todos</th>
+                            <th>Codigo estudiante</th>
+                            <th>Nombres</th>
+                            <th>Solicitud</th>
+                            <th>Tipo solicitud</th>
+                            <th>Estatus solicitud</th>
+                            <th>Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="isLoading">
+                            <td colspan="7" class="text-center text-muted">No hay datos para mostrar...</td>
+                        </tr>
+                        <tr *ngFor="let re of request" class="align-middle">
+                            <td hidden>{{ re.id }}</td>
+                            <td *ngIf="isStatus4View === false">
+                                <input type="checkbox" [(ngModel)]="re.selected" (change)="onRowSelectionChange(re)">
+                            </td>
+                            <td>
+                                <p class="fw-bold mb-1">{{ re.studentIdentification }}</p>
+                            </td>
+                            <td>{{ re.studentName }}</td>
+                            <td>{{ re.serviceName }}</td>
+                            <td>{{ re.serviceType }}</td>
+                            <td>{{ re.status }}</td>
+                            <td>
+                                <button type="button" class="btn btn-secondary btn-sm rounded-pill shadow-sm px-3"
+                                    (click)="modalReception(re)">Ver solicitud <i
+                                        class="fas fa-check-circle me-2"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón para enviar los ID seleccionados -->
+    <div class="row mt-4">
+        <div class="col-md-12 text-center">
+            <button type="button" class="btn btn-success shadow-sm rounded-pill px-4" (click)="sendSelectedIds()">
+                <i class="fas fa-paper-plane me-2"></i> Enviar Seleccionados
+            </button>
+        </div>
+    </div>
+
+    <br>
+    <!-- Gráfico de barras -->
+    <div class="row">
+        <div class="col-md-6">
+            <canvas id="myPieChart" width="50" height="50"></canvas>
+        </div>
+        <div class="col-md-6">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+    <br>
+
+    <!-- Footer -->
+    <div class="row">
+        <div class="col-md-12 text-center mt-4 mb-2">
+            <footer class="footer text-white py-3 rounded">
+                <p class="mb-0">&copy; 2024 Todos los derechos reservados.</p>
+            </footer>
+        </div>
+    </div>
+
+
+</div>

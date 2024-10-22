@@ -1,0 +1,56 @@
+<div class="modal-header">
+    <h5 class="modal-title">Solicitud MESCYT</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeModal('NoAccion')"></button>
+</div>
+
+<div class="modal-body">
+    <form (ngSubmit)="onSubmit()" #documentForm="ngForm">
+        <!-- Información introductoria -->
+        <div class="mb-3">
+            <p class="text-muted">Por favor, sube los siguientes documentos. Asegúrate de que cada archivo no supere los
+                2 MB y esté en formato PDF.</p>
+        </div>
+
+        <!-- Documento Fotocopia del Título Maestría -->
+        <div *ngIf="shouldShowField('FotocopiaTituloMaestria')" class="mb-3">
+            <label for="documentFotoCopia" class="form-label">Fotocopia del título Maestría (PDF)</label>
+            <input class="form-control" type="file" id="documentFotoCopia"
+                (change)="onFileChange($event, 'FotocopiaTituloMaestria')" accept=".pdf">
+            <small class="form-text text-muted">Sube fotocopia del título de la Maestría en (8.5 x 11 in).</small>
+            <input type="hidden" [value]="filesToUpdate['FotocopiaTituloMaestria']?.studentFileId">
+        </div>
+
+        <!-- Documento Acta de Nacimiento -->
+        <div *ngIf="shouldShowField('ActaNacimiento')" class="mb-3">
+            <label for="documentActaNacimiento" class="form-label">Acta de Nacimiento (PDF)</label>
+            <input class="form-control" type="file" id="documentActaNacimiento"
+                (change)="onFileChange($event, 'ActaNacimiento')" accept=".pdf">
+            <small class="form-text text-muted">Sube tu acta de nacimiento escaneada.</small>
+            <input type="hidden" [value]="filesToUpdate['ActaNacimiento']?.studentFileId">
+        </div>
+
+        <!-- Documento Copia de Cédula -->
+        <div *ngIf="shouldShowField('CopiaCedula')" class="mb-3">
+            <label for="documentCopiaCedula" class="form-label">Copia de Cédula (PDF)</label>
+            <input class="form-control" type="file" id="documentCopiaCedula"
+                (change)="onFileChange($event, 'CopiaCedula')" accept=".pdf">
+            <small class="form-text text-muted">Sube tu Copia de Cédula.</small>
+            <input type="hidden" [value]="filesToUpdate['CopiaCedula']?.studentFileId">
+        </div>
+
+        <!-- Documento Legalizados de Grado -->
+        <div *ngIf="shouldShowField('DocumentoLegalizadoGrado')" class="mb-3">
+            <label for="documentLegalizadoDeGrado" class="form-label">Documentos legalizados de grado (PDF)</label>
+            <input class="form-control" type="file" id="documentLegalizadoDeGrado"
+                (change)="onFileChange($event, 'DocumentosLegalizados')" accept=".pdf">
+            <small class="form-text text-muted">Pueden ser Récord de Nota de Grado Legalizado, Copia de título
+                legalizado, Certificación de título legalizado.</small>
+            <input type="hidden" [value]="filesToUpdate['DocumentosLegalizados']?.studentFileId">
+        </div>
+
+        <!-- Botón para enviar los documentos -->
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Subir Documentos</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,89 @@
+<app-navbar></app-navbar>
+
+<div class="container-fluid">
+    <!-- Título -->
+    <div class="row">
+        <div class="col-md-12">
+            <br>
+            <h4 class="text-default fw-bold text-center">Mantenimiento de Usuarios</h4>
+            <hr class="border-primary">
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <!-- Botón de nuevo usuario y barra de búsqueda -->
+    <div class="row">
+        <div class="col-md-8 text-start mb-4">
+            <button type="button" class="btn btn-success btn-md shadow-sm rounded-pill px-4" (click)="navigateTo()">
+                <i class="fas fa-plus me-2"></i> Nuevo Usuario
+            </button>
+        </div>
+        <div class="col-md-4 text-end mb-4">
+            <input type="text" id="searchInput" placeholder="Buscar usuario..."
+                class="form-control rounded-pill shadow-sm" (keyup)="searchTable()" />
+        </div>
+    </div>
+
+    <!-- Tabla de usuarios con límite de 10 registros y scroll -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive bg-light rounded shadow p-4" style="max-height: 600px; overflow-y: auto;">
+                <!-- Estilo scroll -->
+                <table class="table align-middle mb-0 bg-white table-hover table-bordered rounded shadow-sm"
+                    id="userTable">
+                    <thead class="bg-primary text-white text-uppercase">
+                        <tr>
+                            <th class="text-center">Avatar</th>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Correo</th>
+                            <th>Teléfono</th>
+                            <th>Rol</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="isLoading">
+                            <td colspan="7" class="text-center text-muted">Cargando...</td>
+                        </tr>
+                        <tr *ngFor="let user of users" class="align-middle">
+                            <td class="text-center">
+                                <a [href]="user.profilePicture">
+                                    <img [src]="user.profilePicture || 'https://mdbootstrap.com/img/new/avatars/8.jpg'"
+                                        alt="Imagen de perfil" style="width: 45px; height: 45px"
+                                        class="rounded-circle shadow-sm" />
+                                </a>
+                            </td>
+                            <td>
+                                <p class="fw-bold mb-1">{{ user.firstName }}</p>
+                            </td>
+                            <td>
+                                <p class="text-muted">{{ user.lastName }}</p>
+                            </td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.phoneNumber }}</td>
+                            <td>{{ user.rol }}</td>
+                            <td class="text-center">
+                                <button type="button"
+                                    class="btn btn-primary btn-sm rounded-pill shadow-sm px-3">Editar</button>
+                                <button type="button"
+                                    class="btn btn-danger btn-sm rounded-pill shadow-sm px-3">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="row">
+        <div class="col-md-12 text-center mt-4 mb-2">
+            <footer class="footer text-white py-3 rounded">
+                <p class="mb-0">&copy; 2024 Todos los derechos reservados.</p>
+            </footer>
+        </div>
+    </div>
+</div>

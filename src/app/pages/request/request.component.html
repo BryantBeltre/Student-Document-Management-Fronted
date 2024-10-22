@@ -1,0 +1,100 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <!-- Recorremos el array de servicios NO completados -->
+    <div class="col-lg-4 col-md-6 mb-4" *ngFor="let service of data">
+      <div class="card border-0 shadow-sm h-100">
+        <!-- Encabezado de la tarjeta -->
+        <div class="card-header bg-primary text-white d-flex align-items-center justify-content-between">
+          <h5 class="mb-0">{{ service.serviceName }}</h5>
+          <i class="bi bi-briefcase-fill fs-4"></i>
+        </div>
+
+        <!-- Cuerpo de la tarjeta -->
+        <div class="card-body">
+          <!-- Icono y tipo de servicio -->
+          <div class="mb-2 d-flex align-items-center">
+            <i class="bi bi-tag-fill text-primary fs-5 me-2"></i>
+            <p class="mb-0"><strong>Tipo de Servicio:</strong> {{ service.serviceType }}</p>
+          </div>
+
+          <div class="mb-3 d-flex align-items-center">
+            <i class="bi bi-info-circle-fill fs-5 me-2" [ngClass]="{
+                          'text-warning': service.status === 'Nueva' || service.status === 'Corregida',
+                          'text-success': service.status === 'Validada',
+                          'text-danger': service.status === 'Devuelta',
+                          'text-info': service.status === 'Pagada' ,                          
+                        }"></i>
+            <p class="mb-0"><strong>Estado: </strong>
+              <span class="badge" [ngClass]="{
+                            'bg-warning': service.status === 'Nueva' || service.status === 'Corregida',
+                            'bg-success': service.status === 'Validada',
+                            'bg-danger': service.status === 'Devuelta',
+                            'bg-info': service.status === 'Pagada'
+                          }">
+                {{ getStatusText(service.status) }} <!-- Aquí llamamos al método -->
+              </span>
+            </p>
+          </div>
+
+          <!-- Descripción opcional del servicio -->
+          <p class="text-muted">Este es un servicio relacionado con trámites estudiantiles. Revisa el estado
+            para más detalles.</p>
+        </div>
+
+        <!-- Pie de la tarjeta con botones de acción -->
+        <div class="card-footer bg-white d-flex justify-content-between align-items-center">
+          <span class="text-muted small">Codigo Estudiante: {{service.studentIdentification}}</span>
+          <a *ngIf="service.status === 'Validada'" type="button" class="btn btn-outline-success btn-sm"
+            (click)="openPaymentModal(service)">Procesar pago</a>
+          <a *ngIf="service.status === 'Devuelta'" type="button" class="btn btn-outline-info btn-sm"
+            (click)="UpdatedFile(service)">Modificar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón para alternar entre mostrar u ocultar los completados -->
+  <div class="row mt-4">
+    <div class="col text-center">
+      <button class="btn btn-primary" (click)="toggleCompleted()">
+        {{ showCompleted ? 'Ocultar Completadas' : 'Mostrar Completadas' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Si showCompleted es true, mostrar las solicitudes completadas -->
+  <div *ngIf="showCompleted" class="row justify-content-center mt-3">
+    <div class="col-lg-4 col-md-6 mb-4" *ngFor="let completedService of completedServices">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-header bg-success text-white d-flex align-items-center justify-content-between">
+          <h5 class="mb-0">{{ completedService.serviceName }}</h5>
+          <i class="bi bi-check-circle-fill fs-4"></i>
+        </div>
+
+        <!-- Cuerpo de la tarjeta -->
+        <div class="card-body">
+          <!-- Icono y tipo de servicio -->
+          <div class="mb-2 d-flex align-items-center">
+            <i class="bi bi-tag-fill text-success fs-5 me-2"></i>
+            <p class="mb-0"><strong>Tipo de Servicio:</strong> {{ completedService.serviceType }}</p>
+          </div>
+
+          <div class="mb-3 d-flex align-items-center">
+            <i class="bi bi-info-circle-fill text-success fs-5 me-2"></i>
+            <p class="mb-0"><strong>Estado:</strong> Completada</p>
+          </div>
+
+          <!-- Descripción opcional del servicio completado -->
+          <p class="text-muted">Este servicio ha sido completado. Puedes revisar los detalles del trámite aquí.</p>
+        </div>
+
+        <!-- Pie de la tarjeta -->
+        <div class="card-footer bg-white d-flex justify-content-between align-items-center">
+          <span class="text-muted small">Codigo Estudiante: {{completedService.studentIdentification}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

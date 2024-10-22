@@ -1,0 +1,134 @@
+<div class="login-container">
+    <div class="container bg-light p-4 rounded shadow-lg">
+        <main>
+            <div class="row g-5">
+                <!-- Billing Address Section -->
+                <div class="col-md-12 col-lg-8 mx-auto">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="mb-0"><b> Datos Personales Empleados</b></h4>
+                        <a type="button" class="btn btn-outline-secondary btn-sm" (click)="gotToForm()">
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                    </div>
+                    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <label for="firstName" class="form-label">Nombres</label>
+                                <input type="text" formControlName="firstName" class="form-control" id="firstName"
+                                    required>
+                                <div *ngIf="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched"
+                                    class="invalid-feedback">
+                                    El Nombre es un campo requerido.
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="lastName" class="form-label">Apellidos</label>
+                                <input type="text" formControlName="lastName" class="form-control" id="lastName"
+                                    required>
+                                <div *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched"
+                                    class="invalid-feedback">
+                                    El Apellido es un campo requerido.
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="identityCard" class="form-label">Cédula</label>
+                                <input type="text" formControlName="identityCard" class="form-control" id="identityCard"
+                                mask="000-0000000-0" required>
+                                <div *ngIf="registerForm.get('identityCard')?.invalid && registerForm.get('identityCard')?.touched"
+                                    class="invalid-feedback">
+                                    La Cédula es un campo requerio.
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="phone" class="form-label">Teléfono</label>
+                                <input type="text" formControlName="phone" class="form-control" id="phone" mask="999-999-9999" required>
+                                <div *ngIf="registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched"
+                                    class="invalid-feedback">
+                                    El numero de telefono es un campo requerido.
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <label for="email" class="form-label">Correo</label>
+                                <input type="email" formControlName="email" class="form-control" id="email"
+                                    placeholder="you@example.com" required>
+                                <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+                                    class="invalid-feedback">
+                                    El correo es un campo requerido.
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="profileImage" class="form-label">Foto de perfil</label>
+                                <input type="file" formControlName="profileImage" class="form-control" id="profileImage"
+                                    accept="image/*" required>
+                                <div *ngIf="registerForm.get('profileImage')?.invalid && registerForm.get('profileImage')?.touched"
+                                    class="invalid-feedback">
+                                    La foto de perfil es un campo requerido.
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="username" class="form-label">Nombre de usuario</label>
+                                <input type="text" formControlName="username" class="form-control" id="username"
+                                    required>
+                                <div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched"
+                                    class="invalid-feedback">
+                                    El Nombre de usuario es un campo requerido.
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="rol" class="form-label">Rol a desempeñar</label>
+                                <select class="form-select form-control" formControlName="rol"
+                                    aria-label="Large select example">
+                                    <option value="">-- Selecciona una opción --</option>
+<!--                                     <option value="0">Admin</option>
+ -->                                    <option value="2">Recepcionista</option>
+                                    <option value="3">Gerente Departamental</option>
+                                </select>
+                                <div *ngIf="registerForm.get('rol')?.invalid && registerForm.get('rol')?.touched"
+                                    class="invalid-feedback">
+                                    Por favor, selecciona un rol.
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <label for="password" class="form-label">Contraseña</label>
+                                <input type="password" formControlName="password" class="form-control" id="password"
+                                    required>
+                                <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+                                    class="invalid-feedback">
+                                    La contraseña debe tener al menos una mayúscula, un número y ser mayor a 8
+                                    caracteres.
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+                                <input type="password" formControlName="confirmPassword" class="form-control"
+                                    id="confirmPassword" required>
+                                <div *ngIf="registerForm.errors?.['passwordsMismatch'] && registerForm.get('confirmPassword')?.touched"
+                                    class="invalid-feedback">
+                                    Las contraseñas no coinciden.
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <hr>
+                        <button class="button-register w-100 btn btn-lg" type="submit"
+                            [disabled]="registerForm.invalid || isSubmitting">Registrar usuario</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <footer class="my-5 pt-5 text-center text-small">
+            <p class="mb-1">© 2024 Todos los derechos reservados.</p>
+        </footer>
+    </div>
+</div>
